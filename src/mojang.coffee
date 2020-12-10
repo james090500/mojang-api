@@ -31,41 +31,6 @@ export usernameToUuid = (username, secs = -1) ->
   time = if secs >= 0 then "?at=#{secs}" else ""
   json("https://api.mojang.com/users/profiles/minecraft/#{username}#{time}")
 
-# Get the Uuids of multiple usernames at the current time.
-#
-# @example
-# [
-#   {
-#     "id": "dad8b95ccf6a44df982e8c8dd70201e0",
-#     "name": "ElectroidFilms",
-#     "legacy": false,
-#     "demo": false
-#   }
-# ]
-#
-# @param {array<string>} usernames - Minecraft usernames, maximum of 100.
-# @throws {400} - When given an empty or null username.
-# @returns {promise<object>} - Bulk Uuid response.
-export usernameToUuidBulk = (usernames...) ->
-  json("https://api.mojang.com/profiles/minecraft", body: usernames)
-
-# Get the history of usernames for the Uuid.
-#
-# @example
-# [
-#   {
-#     "name": "ElectroidFilms"
-#   },
-#   {
-#     "name": "Electric",
-#     "changedToAt": 1423059891000
-#   }
-# ]
-#
-# @param {string} id - Uuid to check the username history.
-# @returns {promise<object>} - Username history response.
-export uuidToUsernameHistory = (id) ->
-  json("https://api.mojang.com/user/profiles/#{id}/names")
 
 # Get the session profile of the Uuid.
 #

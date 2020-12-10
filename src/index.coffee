@@ -12,24 +12,16 @@ routeDebug = (request) ->
     error(err.stack || err)
 
 route = (request) ->
-  [base, version, method, arg] = request.url.split("/")[3..6]
-  if base == "mojang" && arg?
-    if version == "v2"
-      if request.method == "OPTIONS"
-        cors()
-      else
-        v2(method, arg)
-    else
-      notFound("Unknown API version '#{version}'")
+  [method, arg] = request.url.split("/")[3..6]
+  if method? && arg?
+    v2(method, arg)
   else
     notFound("Unknown route")
 
 v2 = (method, arg) ->
-  if method == "uuid"
-    uuid(arg)
-  else if method == "user"
+  if method == "user"
     user(arg)
   else if method == "avatar"
     avatar(arg)
   else
-    notFound("Unknown v2 route '#{method}'")
+    notFound("Unknown route")

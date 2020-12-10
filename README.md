@@ -39,7 +39,6 @@ Username or UUID -> Everything<br>
   },
   "legacy": <true|null>,
   "demo": <true|null>,
-  "created_at": <date|null>
 }
 ```
 
